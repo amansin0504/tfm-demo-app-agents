@@ -38,3 +38,35 @@ variable dbsubnet2 {
 variable frontendip {
     default = "10.0.211.10"
 }
+variable checkoutip {
+    default = "10.0.213.10"
+}
+variable adip {
+    default = "10.0.213.11"
+}
+variable recommendationip {
+    default = "10.0.213.12"
+}
+variable paymentip {
+    default = "10.0.213.13"
+}
+variable emailip {
+    default = "10.0.213.14"
+}
+variable productcatalogip {
+    default = "10.0.213.15"
+}
+variable shippingip {
+    default = "10.0.213.16"
+}
+variable currencyip {
+    default = "10.0.213.17"
+}
+variable cartip {
+    default = "10.0.213.18"
+}
+variable redisip {
+    default = "10.0.215.10"
+}
+
+
