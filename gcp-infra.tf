@@ -60,6 +60,227 @@ resource "google_compute_instance" "frontend" {
   }
   network_interface {
     subnetwork = google_compute_subnetwork.websubnet1.id
+    network_ip = var.frontendip
+    access_config {}
+  }
+}
+
+#Create checkout virtual machine
+resource "google_compute_instance" "checkout" {
+  name         = "checkout"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/checkout.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "checkout"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.checkoutip
+    access_config {}
+  }
+}
+
+#Create ad virtual machine
+resource "google_compute_instance" "ad" {
+  name         = "ad"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/ad.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "ad"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.adip
+    access_config {}
+  }
+}
+
+#Create recommendation virtual machine
+resource "google_compute_instance" "recommendation" {
+  name         = "recommendation"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/recommendation.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "recommendation"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.recommendationip
+    access_config {}
+  }
+}
+
+#Create payment virtual machine
+resource "google_compute_instance" "payment" {
+  name         = "payment"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/payment.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "payment"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.paymentip
+    access_config {}
+  }
+}
+
+#Create email virtual machine
+resource "google_compute_instance" "email" {
+  name         = "email"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/email.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "email"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.emailip
+    access_config {}
+  }
+}
+
+#Create productcatalog virtual machine
+resource "google_compute_instance" "productcatalog" {
+  name         = "productcatalog"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/productcatalog.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "productcatalog"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.productcatalogip
+    access_config {}
+  }
+}
+
+#Create shipping virtual machine
+resource "google_compute_instance" "shipping" {
+  name         = "shipping"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/shipping.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "shipping"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.shippingip
+    access_config {}
+  }
+}
+
+#Create currency virtual machine
+resource "google_compute_instance" "currency" {
+  name         = "currency"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/currency.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "currency"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.currencyip
+    access_config {}
+  }
+}
+
+#Create cart virtual machine
+resource "google_compute_instance" "cart" {
+  name         = "cart"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/cart.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "cart"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.appsubnet1.id
+    network_ip = var.cartip
+    access_config {}
+  }
+}
+
+#Create redis virtual machine
+resource "google_compute_instance" "redis" {
+  name         = "redis"
+  machine_type = "e2-medium"
+  zone         = var.zone
+  metadata_startup_script = file("scripts/redis.sh")
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20200720"
+      labels = {
+        service = "redis"
+      }
+    }
+  }
+  network_interface {
+    subnetwork = google_compute_subnetwork.dbsubnet1.id
+    network_ip = var.redisip
     access_config {}
   }
 }

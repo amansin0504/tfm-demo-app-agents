@@ -4,12 +4,11 @@ variable region {
     default = "us-east1"
 }
 variable zone {
-    default = "us-east1a"
+    default = "us-east1-b"
 }
 
 
 #if you change cidr block make sure you update addresses in python and shell scripts.
-
 variable websubnet1 {
     type = string
     default = "10.0.211.0/24"
@@ -33,4 +32,9 @@ variable dbsubnet1 {
 variable dbsubnet2 {
     type = string
     default = "10.0.216.0/24"
+}
+
+#if you change cidr block make sure you update addresses in python and shell scripts.
+variable frontendip {
+    default = "10.0.211.10"
 }
