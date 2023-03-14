@@ -1,9 +1,9 @@
-# Azure Infrastructure
-![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-azure-vm/main/images/architecture-diagram.png)
+# GCP Infrastructure
+![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-gcp-vm/main/images/architecture-diagram.png)
 
 # Deploy Architecture
 ## Prerequisites
-Make sure you have Azure credentials configured with privileges to provision the required Azure resources(azure-infra.tf).
+Make sure you have GCP credentials configured with privileges to provision the required GCP resources(azure-infra.tf).
 
 ## Steps
 1.1 terraform plan > deploymentv1
@@ -12,6 +12,6 @@ Make sure you have Azure credentials configured with privileges to provision the
 
 # Terraform Output
 ## Terraform Plan
-![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-azure-vm/main/images/terraformplan.png)
+![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-gcp-vm/main/images/terraformplan.png)
 ## Terraform Deploy
-![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-azure-vm/main/images/terraform.png)
+![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-gcp-vm/main/images/terraform.png)
