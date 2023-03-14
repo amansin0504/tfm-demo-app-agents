@@ -7,40 +7,84 @@ resource "google_compute_network" "csw-demo-network" {
 
 resource "google_compute_subnetwork" "websubnet1" {
     name                 = "websubnet1"
-    region        = var.region
-    network       = google_compute_network.csw-demo-network.id
-    ip_cidr_range = var.websubnet1
+    region               = var.region
+    network              = google_compute_network.csw-demo-network.id
+    ip_cidr_range        = var.websubnet1
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 }
 resource "google_compute_subnetwork" "websubnet2" {
     name                 = "websubnet2"
     region        = var.region
     network       = google_compute_network.csw-demo-network.id
     ip_cidr_range = var.websubnet2
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 }
 resource "google_compute_subnetwork" "appsubnet1" {
     name                 = "appsubnet1"
     region        = var.region
     network       = google_compute_network.csw-demo-network.id
     ip_cidr_range = var.appsubnet1
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 }
 resource "google_compute_subnetwork" "appsubnet2" {
     name                 = "appsubnet2"
     region        = var.region
     network       = google_compute_network.csw-demo-network.id
     ip_cidr_range = var.appsubnet2
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 }
 resource "google_compute_subnetwork" "dbsubnet1" {
     name                 = "dbsubnet1"
     region        = var.region
     network       = google_compute_network.csw-demo-network.id
     ip_cidr_range = var.dbsubnet1
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 }
 resource "google_compute_subnetwork" "dbsubnet2" {
     name                 = "dbsubnet2"
     region        = var.region
     network       = google_compute_network.csw-demo-network.id
     ip_cidr_range = var.dbsubnet2
+    log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+    }
 
+}
+
+#Create firewall rules
+resource "google_compute_firewall" "csw-demo-firewall" {
+  name    = "csw-demo-firewall"
+  network = google_compute_network.csw-demo-network.name
+  allow {
+    protocol = "icmp"
+  }
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8000-9000"]
+  }
+  source_ranges = ["0.0.0.0/0"]
 }
 
 #Create frontend virtual machine
@@ -83,7 +127,6 @@ resource "google_compute_instance" "checkout" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.checkoutip
-    access_config {}
   }
 }
 
@@ -105,7 +148,6 @@ resource "google_compute_instance" "ad" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.adip
-    access_config {}
   }
 }
 
@@ -127,7 +169,6 @@ resource "google_compute_instance" "recommendation" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.recommendationip
-    access_config {}
   }
 }
 
@@ -149,7 +190,6 @@ resource "google_compute_instance" "payment" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.paymentip
-    access_config {}
   }
 }
 
@@ -171,7 +211,6 @@ resource "google_compute_instance" "email" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.emailip
-    access_config {}
   }
 }
 
@@ -193,7 +232,6 @@ resource "google_compute_instance" "productcatalog" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.productcatalogip
-    access_config {}
   }
 }
 
@@ -215,7 +253,6 @@ resource "google_compute_instance" "shipping" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.shippingip
-    access_config {}
   }
 }
 
@@ -237,7 +274,6 @@ resource "google_compute_instance" "currency" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.currencyip
-    access_config {}
   }
 }
 
@@ -259,7 +295,6 @@ resource "google_compute_instance" "cart" {
   network_interface {
     subnetwork = google_compute_subnetwork.appsubnet1.id
     network_ip = var.cartip
-    access_config {}
   }
 }
 
@@ -281,6 +316,5 @@ resource "google_compute_instance" "redis" {
   network_interface {
     subnetwork = google_compute_subnetwork.dbsubnet1.id
     network_ip = var.redisip
-    access_config {}
   }
 }
