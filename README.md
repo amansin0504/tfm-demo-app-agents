@@ -3,7 +3,7 @@
 
 # Deploy Architecture
 ## Prerequisites
-Make sure you have GCP credentials configured with privileges to provision the required GCP resources(azure-infra.tf).
+Make sure you have GCP credentials configured with privileges to provision the required GCP resources(gcp-infra.tf).
 
 ## Steps
 1.1 terraform plan > deploymentv1
