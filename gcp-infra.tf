@@ -82,9 +82,27 @@ resource "google_compute_firewall" "csw-demo-firewall" {
   }
   allow {
     protocol = "tcp"
-    ports    = ["80", "8000-9000"]
+    ports    = ["80", "22", "8000-9000"]
   }
   source_ranges = ["0.0.0.0/0"]
+}
+
+#Create cloud nat for outbound connectivity from private VMs.
+resource "google_compute_router" "csw-demo-router" {
+  name    = "csw-demo-router"
+  region  = var.region
+  network = google_compute_network.csw-demo-network.id
+
+  bgp {
+    asn = 64514
+  }
+}
+resource "google_compute_router_nat" "csw-demo-nat" {
+  name                               = "csw-demo-nat"
+  router                             = google_compute_router.csw-demo-router.name
+  region                             = google_compute_router.csw-demo-router.region
+  nat_ip_allocate_option             = "AUTO_ONLY"
+  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 }
 
 #Create frontend virtual machine
