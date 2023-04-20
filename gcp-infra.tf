@@ -132,7 +132,7 @@ resource "google_compute_instance" "checkout" {
   name         = "checkout"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/checkout.sh")
+  metadata_startup_script = templatefile("scripts/checkout.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -153,7 +153,7 @@ resource "google_compute_instance" "ad" {
   name         = "ad"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/ad.sh")
+  metadata_startup_script = templatefile("scripts/ad.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -174,7 +174,7 @@ resource "google_compute_instance" "recommendation" {
   name         = "recommendation"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/recommendation.sh")
+  metadata_startup_script = templatefile("scripts/recommendation.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -195,7 +195,7 @@ resource "google_compute_instance" "payment" {
   name         = "payment"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/payment.sh")
+  metadata_startup_script = templatefile("scripts/payment.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -216,7 +216,7 @@ resource "google_compute_instance" "email" {
   name         = "email"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/email.sh")
+  metadata_startup_script = templatefile("scripts/email.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -237,7 +237,7 @@ resource "google_compute_instance" "productcatalog" {
   name         = "productcatalog"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/productcatalog.sh")
+  metadata_startup_script = templatefile("scripts/productcatalog.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -258,7 +258,7 @@ resource "google_compute_instance" "shipping" {
   name         = "shipping"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/shipping.sh")
+  metadata_startup_script = templatefile("scripts/shipping.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -279,7 +279,7 @@ resource "google_compute_instance" "currency" {
   name         = "currency"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/currency.sh")
+  metadata_startup_script = templatefile("scripts/currency.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -300,7 +300,7 @@ resource "google_compute_instance" "cart" {
   name         = "cart"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/cart.sh")
+  metadata_startup_script = templatefile("scripts/cart.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
@@ -321,7 +321,7 @@ resource "google_compute_instance" "redis" {
   name         = "redis"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/redis.sh")
+  metadata_startup_script = templatefile("scripts/redis.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
