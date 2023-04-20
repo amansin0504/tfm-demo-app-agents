@@ -3,6 +3,7 @@ sudo apt update
 sudo apt install python3-pip -y
 sudo apt install wget
 sudo pip install Flask
+sudo apt install unzip
 
 git clone https://github.com/amansin0504/tfm-demo-app-agents.git
 mkdir app/
