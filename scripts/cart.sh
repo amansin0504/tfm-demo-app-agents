@@ -7,11 +7,11 @@ sudo pip install Flask
 git clone https://github.com/amansin0504/tfm-demo-app-agents.git
 mkdir app/
 mkdir app/templates
-cp tfm-demo-app-gcp-vm/source/carts.py app/app.py
-cp tfm-demo-app-gcp-vm/source/templates/carts.json app/templates/
+cp tfm-demo-app-agents/source/carts.py app/app.py
+cp tfm-demo-app-agents/source/templates/carts.json app/templates/
 cd app
 flask run  --host=0.0.0.0 -p 8997&
 
 wget -O csw-linux-installer.sh ${downloadurl}
 chmod 755 csw-linux-installer.sh 
-./csw-linux-installer.sh
+sudo ./csw-linux-installer.sh

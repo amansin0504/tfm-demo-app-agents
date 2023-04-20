@@ -110,7 +110,7 @@ resource "google_compute_instance" "frontend" {
   name         = "frontend"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/frontend.sh", {downloadurl = cswinstaller.value})
+  metadata_startup_script = templatefile("scripts/frontend.sh", {downloadurl = var.cswinstaller})
 
   boot_disk {
     initialize_params {
