@@ -11,7 +11,7 @@ mkdir app/templates
 cp tfm-demo-app-agents/source/frontend.py app/app.py
 cp tfm-demo-app-agents/source/templates/index.html app/templates/
 cd app
-sudo flask run  --host=0.0.0.0 -p 8080&
+flask run  --host=0.0.0.0 -p 8080&
 
 wget -O csw-linux-installer.sh "${downloadurl}"
 chmod 755 csw-linux-installer.sh 
