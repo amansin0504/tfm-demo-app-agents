@@ -1,4 +1,5 @@
 # GCP Infrastructure
+Each VM in this deployment will be provisioned with a secure workload agent.
 ![alt text](https://raw.githubusercontent.com/amansin0504/tfm-demo-app-gcp-vm/main/images/architecture-diagram.png)
 
 # Deploy Architecture

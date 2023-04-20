@@ -1,14 +1,14 @@
 
 #Create subnets in VNET network 
-resource "google_compute_network" "csw-demo-network" {
-  name                    = "csw-demo-network"
+resource "google_compute_network" "csw-agent-demo-network" {
+  name                    = "csw-agent-demo-network"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "websubnet1" {
     name                 = "websubnet1"
     region               = var.region
-    network              = google_compute_network.csw-demo-network.id
+    network              = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range        = var.websubnet1
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -19,7 +19,7 @@ resource "google_compute_subnetwork" "websubnet1" {
 resource "google_compute_subnetwork" "websubnet2" {
     name                 = "websubnet2"
     region        = var.region
-    network       = google_compute_network.csw-demo-network.id
+    network       = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range = var.websubnet2
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -30,7 +30,7 @@ resource "google_compute_subnetwork" "websubnet2" {
 resource "google_compute_subnetwork" "appsubnet1" {
     name                 = "appsubnet1"
     region        = var.region
-    network       = google_compute_network.csw-demo-network.id
+    network       = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range = var.appsubnet1
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -41,7 +41,7 @@ resource "google_compute_subnetwork" "appsubnet1" {
 resource "google_compute_subnetwork" "appsubnet2" {
     name                 = "appsubnet2"
     region        = var.region
-    network       = google_compute_network.csw-demo-network.id
+    network       = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range = var.appsubnet2
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -52,7 +52,7 @@ resource "google_compute_subnetwork" "appsubnet2" {
 resource "google_compute_subnetwork" "dbsubnet1" {
     name                 = "dbsubnet1"
     region        = var.region
-    network       = google_compute_network.csw-demo-network.id
+    network       = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range = var.dbsubnet1
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -63,7 +63,7 @@ resource "google_compute_subnetwork" "dbsubnet1" {
 resource "google_compute_subnetwork" "dbsubnet2" {
     name                 = "dbsubnet2"
     region        = var.region
-    network       = google_compute_network.csw-demo-network.id
+    network       = google_compute_network.csw-agent-demo-network.id
     ip_cidr_range = var.dbsubnet2
     log_config {
     aggregation_interval = "INTERVAL_10_MIN"
@@ -76,7 +76,7 @@ resource "google_compute_subnetwork" "dbsubnet2" {
 #Create firewall rules
 resource "google_compute_firewall" "csw-demo-firewall" {
   name    = "csw-demo-firewall"
-  network = google_compute_network.csw-demo-network.name
+  network = google_compute_network.csw-agent-demo-network.name
   allow {
     protocol = "icmp"
   }
@@ -91,7 +91,7 @@ resource "google_compute_firewall" "csw-demo-firewall" {
 resource "google_compute_router" "csw-demo-router" {
   name    = "csw-demo-router"
   region  = var.region
-  network = google_compute_network.csw-demo-network.id
+  network = google_compute_network.csw-agent-demo-network.id
 
   bgp {
     asn = 64514
@@ -110,7 +110,7 @@ resource "google_compute_instance" "frontend" {
   name         = "frontend"
   machine_type = "e2-medium"
   zone         = var.zone
-  metadata_startup_script = file("scripts/frontend.sh")
+  metadata_startup_script = file("scripts/frontend.sh", {downloadurl = cswinstaller.value})
 
   boot_disk {
     initialize_params {
